@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>animación</title>
+    <canvas id="canvas" width="1366" height="768" style="width:100%" height:"100%"></canvas>
+    <script language="javascript" type="text/javascript">
+      var canvas = document.getElementById("canvas");
+      var ctx = canvas.getContext("2d");
+      var canvas2 = document.getElementById("canvas");
+      var ctx2 = canvas2.getContext("2d");
+      var myVar = setInterval(dibujo, 1);
+
+      var x = 0;
+      var y = 0;
+      var xval = xval + 100;
+      var x1 = 0;
+      var velocidad = [0,0,0,0,0,0,0,0,0,0,0,0];
+      var lunax;
+      var lunay;
+      var i;
+
+
+      var sol = {
+
+        color:"yellow",
+        velocidad:0,
+        distancia:"",
+        posx:canvas.width/ 2,
+        posy:canvas.height/ 2,
+        tamx:100,
+        tamy:100
+
+      };
+      var mercurio = {
+        nombre:"Mercurio",
+        color: "brown",
+        velocidad:0.004,
+        distancia:"",
+        posx:65,
+        posy:65,
+        tamx:7,
+        tamy:7
+      };
+      var venus = {
+        nombre:"Venus",
+        color:"brown",
+        velocidad:0.003,
+        distancia:"",
+        posx:110,
+        posy:110,
+        tamx:10,
+        tamy:10
+      };
+      var tierra = {
+        nombre:"Tierra",
+        color:"green",
+        velocidad:0.001,
+        distancia:"",
+        posx:200,
+        posy:200,
+        tamx:9,
+        tamy:9
+      };
+      var luna ={
+        nombre:"Luna",
+        color:"white",
+        velocidad:0.000,
+        posx:20,
+        posy:20,
+        tamx:5,
+        tamy:5
+      }
+      var marte = {
+        nombre:"Marte",
+        color:"red",
+        velocidad:0.000,
+        distancia:"",
+        posx:240,
+        posy:240,
+        tamx:3,
+        tamy:3
+      };
+      var jupiter = {
+        nombre:"Jupiter",
+        color:"brown",
+        velocidad:0.000,
+        distancia:"",
+        posx:280,
+        posy:280,
+        tamx:50,
+        tamy:50
+      };
+      var saturno = {
+        nombre:"Saturno",
+        color:"orange",
+        velocidad:0.000,
+        distancia:"",
+        posx:330,
+        posy:330,
+        tamx:40,
+        tamy:40
+      };
+
+      var urano = {
+        nombre:"Urano",
+        color:"aqua",
+        velocidad:0.000,
+        distancia:"",
+        posx:380,
+        posy:380,
+        tamx:20,
+        tamy:20
+      };
+
+      var neptuno = {
+        nombre:"Neptuno",
+        color:"blue",
+        velocidad:0.000,
+        distancia:"",
+        posx:410,
+        posy:410,
+        tamx:18,
+        tamy:18
+      };
+      var pluton = {
+        nombre:"Pluton",
+        color:"aqua",
+        velocidad:0.000,
+        distancia:"",
+        posx:435,
+        posy:435,
+        tamx:2,
+        tamy:2
+      };
+
+      function sky(){
+        var i;
+        for (i = 0; i < 500; i++) {
+          ctx
+          ctx2.beginPath();
+          ctx2.fillStyle = "white";
+          ctx2.arc(Math.random()  * canvas2.width, Math.random() * canvas2.height ,Math.random()*2, 0, 2 * Math.PI);
+          ctx2.fill();
+          ctx2.closePath();
+         }
+
+
+      }
+
+      sky();
+      function crearplaneta(nombre,velocidad,posx,posy,color,tamx,tamy){
+
+          
+           y = Math.sin(velocidad) * posx;
+           x1 = Math.cos(velocidad) * posy;
+           if (nombre=="Tierra"){
+             lunax=x1+canvas.width/2;
+             lunay=y+canvas.height/2;
+           }
+
+
+           ctx.beginPath();
+           ctx.fillStyle = color;
+           ctx.strokeStyle = color;
+     //***********************************************************************
+           //ctx.beginPath();
+           //ctx.strokeStyle = "white";
+           //ctx.fillRect(canvas.width/2-50,canvas.height/2-50,100,100);
+           //ctx.ellipse(mercurio.posx + (canvas.width / 2) ,mercurio.posy + (canvas.height / 2) ,100,100,3.14, 2 * Math.PI,0,false);
+           //ctx.stroke();
+           //ctx.closePath();
+           //***********************************************************************
+           //ctx.arc(canvas.width/2,canvas.height/2,100,0,Math.PI * 2,false);
+           ctx.arc(x1+canvas.width/2, y+canvas.height/2,tamx/2, 0, 2 * Math.PI);
+          //texto
+
+           //ctx.fillRect(x1+canvas.width/2,y+canvas.height/2,tamx,tamy);
+           ctx.stroke();
+           ctx.fill();
+           ctx.closePath();
+           ctx.beginPath();
+           ctx.font = "15px sans-serif";
+           ctx.fillStyle = "White";
+           ctx.fillText(nombre,x1+canvas.width/2,y+canvas.height/2-tamx/2);
+           ctx.closePath();
+
+      }
+      /*function crearplaneta(nombre,velocidad,posx,posy,color,tamx,tamy){
+
+          
+           x1 = x1 + 0.9;
+           y = Math.sin(velocidad) * posx;
+           x1 = Math.cos(velocidad) * posy;
+           ctx.beginPath();
+           ctx.fillStyle = color;
+           ctx.strokeStyle = color;
+           ctx.fillText(nombre,x1+canvas.width/2,y+canvas.height/2-20);
+           ctx.fillStyle="red";
+           ctx.font = "bold 15px sans-serif";
+           if (nombre=="Tierra"){
+             lunax=x1+canvas.width/2;
+             lunay=y+canvas.height/2;
+           }
+           //ctx.fill();
+          // ctx.closePath();
+
+	   //***********************************************************************
+           //ctx.beginPath();
+           //ctx.strokeStyle = "white";
+           //ctx.fillRect(canvas.width/2-50,canvas.height/2-50,100,100);
+           //ctx.ellipse(mercurio.posx + (canvas.width / 2) ,mercurio.posy + (canvas.height / 2) ,100,100,3.14, 2 * Math.PI,0,false);
+           //ctx.stroke();
+           //ctx.closePath();
+           //***********************************************************************
+           //ctx.arc(canvas.width/2,canvas.height/2,100,0,Math.PI * 2,false);
+           ctx.arc(x1+canvas.width/2, y+canvas.height/2,tamx/2, 0, 2 * Math.PI);
+           //ctx.fillRect(x1+canvas.width/2,y+canvas.height/2,tamx,tamy);
+           ctx.stroke();
+           ctx.fill();
+           ctx.closePath();
+
+
+      }*/
+
+
+      function crearlunita(nombre,velocidad,posx,posy,color,tamx,tamy){
+
+          
+           x1 = Math.sin(velocidad) * posx;
+           y = Math.cos(velocidad) * posy;
+           ctx.beginPath();
+           ctx.fillStyle = color;
+           ctx.strokeStyle = color;
+     //***********************************************************************
+           //ctx.beginPath();
+           //ctx.strokeStyle = "white";
+           //ctx.fillRect(canvas.width/2-50,canvas.height/2-50,100,100);
+           //ctx.ellipse(mercurio.posx + (canvas.width / 2) ,mercurio.posy + (canvas.height / 2) ,100,100,3.14, 2 * Math.PI,0,false);
+           //ctx.stroke();
+           //ctx.closePath();
+           //***********************************************************************
+           //ctx.arc(canvas.width/2,canvas.height/2,100,0,Math.PI * 2,false);
+           ctx.arc(lunax+y,lunay+x1,tamx/2, 0, 2 * Math.PI);
+          //texto
+
+           //ctx.fillRect(x1+canvas.width/2,y+canvas.height/2,tamx,tamy);
+           ctx.stroke();
+           ctx.fill();
+           ctx.closePath();
+           ctx.beginPath();
+           ctx.font = "15px sans-serif";
+           ctx.fillStyle = "White";
+           ctx.fillText(nombre,lunax+y,lunay+x1-tamx);
+           ctx.closePath();
+      }
+
+      function dibujo() {
+
+
+        ctx.beginPath();
+        ctx.fillStyle = "black";
+        ctx.fillRect(0,0,1366,768);
+        ctx.fillStyle = "yellow";
+        //ctx.fillRect(canvas.width/2-50,canvas.height/2-50,100,100);
+
+        ctx.arc(canvas.width/2,canvas.height/2,50, 0, 2 * Math.PI);
+         //crearplaneta(velocidad[0],sol.posx,sol.posy,sol.color,sol.tamx,sol.tamy);
+        ctx.fill();
+
+        ctx.closePath();
+
+        ctx.beginPath();
+        //ctx.moveTo(0,150);
+        //ctx.lineTo(1300,150);
+        //ctx.strokeStyle = "white";
+        ctx.stroke();
+        ctx.closePath();
+      //for (i=0;i<13;i++){
+         // xval = xval + 100;
+         // ctx.moveTo(xval,160);
+         // ctx.lineTo(xval,150);
+        //  ctx.stroke();
+     // }
+     //los contadores de la velocidad
+     velocidad[0] = velocidad[0] + 0.004;//mercurio
+     velocidad[1] = velocidad[1] + 0.003;//venus
+     velocidad[2] = velocidad[2] + 0.0005;//tierra
+     velocidad[3] = velocidad[3] + 0.0005;//marte
+     velocidad[4] = velocidad[4] + 0.0001;//jupiter
+     velocidad[5] = velocidad[5] + 0.0002;//saturno
+     velocidad[6] = velocidad[6] + 0.0003;//urano
+     velocidad[7] = velocidad[7] + 0.0005;//neptuno
+     velocidad[8] = velocidad[8] + 0.012;//luna
+     velocidad[9] = velocidad[9] + 0.0002;//pluton
+     
+     // orbitas
+
+
+
+
+     //Creamos los planetas
+     crearplaneta(mercurio.nombre,velocidad[0],mercurio.posx,mercurio.posy,mercurio.color,mercurio.tamx,mercurio.tamy);
+     crearplaneta(venus.nombre,velocidad[1],venus.posx,venus.posy,venus.color,venus.tamx,venus.tamy);
+     crearplaneta(tierra.nombre,velocidad[2],tierra.posx,tierra.posy,tierra.color,tierra.tamx,tierra.tamy);
+     crearplaneta(marte.nombre,velocidad[3],marte.posx,marte.posy,marte.color,marte.tamx,marte.tamy);
+     crearplaneta(jupiter.nombre,velocidad[4],jupiter.posx,jupiter.posy,jupiter.color,jupiter.tamx,jupiter.tamy);
+     crearplaneta(saturno.nombre,velocidad[5],saturno.posx,saturno.posy,saturno.color,saturno.tamx,saturno.tamy);
+     crearplaneta(urano.nombre,velocidad[6],urano.posx,urano.posy,urano.color,urano.tamx,urano.tamy);
+     crearplaneta(neptuno.nombre,velocidad[7],neptuno.posx,neptuno.posy,neptuno.color,neptuno.tamx,neptuno.tamy);
+     crearlunita(luna.nombre,velocidad[8],luna.posx,luna.posy,luna.color,luna.tamx,luna.tamy);
+     crearplaneta(pluton.nombre,velocidad[9],pluton.posx,pluton.posy,pluton.color,pluton.tamx,pluton.tamy);
+     ctx.closePath();
+     /*ctx.fillStyle = "yellow";
+     //ctx.fillRect(canvas.width/2-50,canvas.height/2-50,100,100);
+     ctx.arc(canvas.width/2,canvas.height/2,50, 0, 2 * Math.PI);
+     ctx.fill();*/
+      }
+
+
+
+
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>
